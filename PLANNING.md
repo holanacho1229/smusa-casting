@@ -163,3 +163,4 @@
 |---|---|
 | 2026-06-16 | Project kickoff. Brain dump ingested. Tech stack decided. PROJECT.md + PLANNING.md created. |
 | 2026-06-16 | Phase 0 complete. Next.js 14 scaffolded, Tailwind + Framer Motion + Supabase JS installed, design tokens set, Syne + Inter fonts wired, folder structure created, logo copied to public assets, TypeScript clean. |
+| 2026-06-23 | Phase 1 built. All 5 sections live: Hero, Marquee Ticker, Offer, SMP Info, Form shell, Footer. Grain overlay, scroll-reveal animations, orange-red accent. Live reviewed in browser. Fix next session: nav/logo, form left clipping, section contrast, gallery text, footer logo. |
