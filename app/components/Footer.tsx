@@ -4,8 +4,9 @@ export default function Footer() {
   return (
     <footer
       className="py-10"
-      style={{ paddingLeft: "clamp(1.5rem, 5vw, 5rem)", paddingRight: "clamp(1.5rem, 5vw, 5rem)" }}
       style={{
+        paddingLeft: "clamp(1.5rem, 5vw, 5rem)",
+        paddingRight: "clamp(1.5rem, 5vw, 5rem)",
         background: "var(--color-surface)",
         borderTop: "1px solid var(--color-border)",
       }}
