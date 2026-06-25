@@ -1,25 +1,22 @@
 "use client";
 
-import Image from "next/image";
-
 export default function Footer() {
   return (
     <footer
-      className="px-6 md:px-12 py-10"
+      className="py-10"
+      style={{ paddingLeft: "clamp(1.5rem, 5vw, 5rem)", paddingRight: "clamp(1.5rem, 5vw, 5rem)" }}
       style={{
         background: "var(--color-surface)",
         borderTop: "1px solid var(--color-border)",
       }}
     >
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-6">
-        {/* Logo */}
-        <Image
-          src="/assets/images/logo-black.png"
-          alt="Scalp Micro USA"
-          width={120}
-          height={32}
-          className="invert opacity-60"
-        />
+        <span
+          className="text-[10px] tracking-[0.3em] uppercase"
+          style={{ color: "var(--color-text-muted)", opacity: 0.5 }}
+        >
+          Scalp Micro USA
+        </span>
 
         {/* Links */}
         <nav className="flex flex-wrap justify-center md:justify-end gap-x-8 gap-y-3">

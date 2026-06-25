@@ -46,11 +46,13 @@ export default function SMPInfo() {
   return (
     <section
       ref={ref}
-      className="px-6 md:px-12"
       style={{
+        paddingLeft: "clamp(1.5rem, 5vw, 5rem)",
+        paddingRight: "clamp(1.5rem, 5vw, 5rem)",
         paddingTop: "var(--section-padding)",
         paddingBottom: "var(--section-padding)",
         background: "var(--color-surface)",
+        borderTop: "1px solid var(--color-border)",
       }}
     >
       <div className="max-w-6xl mx-auto">
@@ -70,7 +72,7 @@ export default function SMPInfo() {
             className="font-black uppercase leading-[0.9] tracking-tight"
             style={{
               fontFamily: "var(--font-syne)",
-              fontSize: "clamp(2.8rem, 6vw, 5.5rem)",
+              fontSize: "clamp(2rem, 4.5vw, 4.5rem)",
               color: "var(--color-text-primary)",
             }}
           >
@@ -151,7 +153,7 @@ export default function SMPInfo() {
                 </p>
                 <p
                   className="text-[10px] text-center px-4"
-                  style={{ color: "var(--color-border)" }}
+                  style={{ color: "var(--color-text-muted)", opacity: 0.4 }}
                 >
                   {item.sub}
                 </p>

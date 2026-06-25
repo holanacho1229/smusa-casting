@@ -59,11 +59,13 @@ export default function Offer() {
   return (
     <section
       ref={ref}
-      className="px-6 md:px-12"
       style={{
+        paddingLeft: "clamp(1.5rem, 5vw, 5rem)",
+        paddingRight: "clamp(1.5rem, 5vw, 5rem)",
         paddingTop: "var(--section-padding)",
         paddingBottom: "var(--section-padding)",
         background: "var(--color-bg)",
+        borderTop: "1px solid var(--color-border)",
       }}
     >
       <div className="max-w-6xl mx-auto">
@@ -79,26 +81,24 @@ export default function Offer() {
           >
             The Exchange
           </p>
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
-            <h2
-              className="font-black uppercase leading-[0.9] tracking-tight"
-              style={{
-                fontFamily: "var(--font-syne)",
-                fontSize: "clamp(2.8rem, 6vw, 5.5rem)",
-                color: "var(--color-text-primary)",
-              }}
-            >
-              The Documentary<br />Project.
-            </h2>
-            <p
-              className="max-w-sm text-base leading-relaxed font-light md:text-right"
-              style={{ color: "var(--color-text-muted)" }}
-            >
-              We are looking for real stories. In exchange for documenting your
-              hair loss journey and treatment on camera, we are fully sponsoring
-              select SMP transformations. New stories are selected every month.
-            </p>
-          </div>
+          <h2
+            className="font-black uppercase leading-[0.9] tracking-tight mb-6"
+            style={{
+              fontFamily: "var(--font-syne)",
+              fontSize: "clamp(2rem, 4.5vw, 4.5rem)",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            The Documentary<br />Project.
+          </h2>
+          <p
+            className="text-base leading-relaxed font-light"
+            style={{ color: "var(--color-text-muted)", maxWidth: "52ch" }}
+          >
+            We are looking for real stories. In exchange for documenting your
+            hair loss journey and treatment on camera, we are fully sponsoring
+            select SMP transformations. New stories are selected every month.
+          </p>
         </div>
 
         {/* Divider */}

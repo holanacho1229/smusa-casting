@@ -27,13 +27,15 @@ export default function ApplicationForm() {
     <section
       id="apply"
       ref={ref}
-      className="px-6 md:px-12"
       style={{
+        paddingLeft: "clamp(1.5rem, 5vw, 5rem)",
+        paddingRight: "clamp(1.5rem, 5vw, 5rem)",
         paddingTop: "var(--section-padding)",
         paddingBottom: "var(--section-padding)",
         background: "var(--color-bg)",
       }}
     >
+
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div
