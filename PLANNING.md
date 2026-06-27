@@ -109,7 +109,12 @@
 - Create `applications` row with all form data + photo URLs
 - Success state: confirmation screen / thank you message
 - Error handling: network failures, oversized files, missing required fields
-- Email notification to Matt on new submission (Supabase edge function or Resend)
+- Email notification to Matt on new submission (Resend) ✅
+- **Applicant confirmation email (Resend):** every applicant receives a confirmation
+  email after submitting. Must include: confirmation their application was received,
+  clear next steps / what to expect, and warm-up content to nurture them further
+  down the sales funnel (e.g. SMP info, social proof, links). Copy to be finalized —
+  placeholder content for now, revisit before launch.
 
 ---
 
@@ -131,6 +136,10 @@
 
 - [ ] Purchase domain (Matt to confirm name)
 - [ ] Connect domain in Vercel
+- [ ] **Verify sending domain in Resend** (add DNS records) so applicant
+      confirmation emails deliver to all applicants — set `EMAIL_FROM` to the
+      verified address. Until then, Resend test mode only sends to the account owner.
+- [ ] Finalize applicant confirmation email copy (warm-up / funnel content)
 - [ ] Set production environment variables in Vercel
 - [ ] Smoke test full submission flow on production
 - [ ] Share link
@@ -163,4 +172,3 @@
 |---|---|
 | 2026-06-16 | Project kickoff. Brain dump ingested. Tech stack decided. PROJECT.md + PLANNING.md created. |
 | 2026-06-16 | Phase 0 complete. Next.js 14 scaffolded, Tailwind + Framer Motion + Supabase JS installed, design tokens set, Syne + Inter fonts wired, folder structure created, logo copied to public assets, TypeScript clean. |
-| 2026-06-23 | Phase 1 built. All 5 sections live: Hero, Marquee Ticker, Offer, SMP Info, Form shell, Footer. Grain overlay, scroll-reveal animations, orange-red accent. Live reviewed in browser. Fix next session: nav/logo, form left clipping, section contrast, gallery text, footer logo. |

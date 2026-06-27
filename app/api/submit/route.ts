@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "../../lib/supabaseAdmin";
+import { sendAdminNotification, sendApplicantConfirmation } from "../../lib/emails";
 
 const BUCKET = "applicant photos";
 const PHOTO_KEYS = ["front", "top", "back", "side"] as const;
@@ -87,6 +88,28 @@ export async function POST(request: NextRequest) {
         { error: `Database error: ${error.message}` },
         { status: 500 }
       );
+    }
+
+    // Fire both emails — non-blocking. A mail failure must never fail the
+    // submission, since the record is already safely saved.
+    const summary = {
+      firstName,
+      lastName,
+      email,
+      phone,
+      age,
+      cityState,
+      hairLossStory,
+      whyMe,
+      applicationId,
+    };
+    try {
+      await Promise.allSettled([
+        sendAdminNotification(summary),
+        sendApplicantConfirmation(summary),
+      ]);
+    } catch (mailErr) {
+      console.error("Email send failed (submission still saved):", mailErr);
     }
 
     return NextResponse.json({ ok: true });
