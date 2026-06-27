@@ -2,6 +2,7 @@
 
 import { useEffect, useReducer, useRef, useState, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { submitApplication } from "../lib/submitApplication";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -164,9 +165,13 @@ export default function ApplicationForm() {
       return;
     }
     setSubmitStatus("submitting");
-    // Phase 4: wire to Supabase here
-    await new Promise((r) => setTimeout(r, 1800));
-    setSubmitStatus("success");
+    try {
+      await submitApplication(formData);
+      setSubmitStatus("success");
+    } catch (err) {
+      console.error(err);
+      setSubmitStatus("error");
+    }
   };
 
   const setField = useCallback(
@@ -378,6 +383,12 @@ export default function ApplicationForm() {
                       </button>
                     )}
                   </div>
+
+                  {submitStatus === "error" && (
+                    <p className="text-xs mt-4 text-right" style={{ color: "var(--color-accent)" }}>
+                      Something went wrong — check your connection and try again.
+                    </p>
+                  )}
                 </motion.div>
               </AnimatePresence>
             </div>
