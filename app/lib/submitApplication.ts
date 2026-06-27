@@ -1,5 +1,3 @@
-import { supabase } from "./supabase";
-
 type PhotoKey = "front" | "top" | "back" | "side";
 
 interface SubmitPayload {
@@ -15,60 +13,27 @@ interface SubmitPayload {
   consent: boolean;
 }
 
-async function uploadPhoto(
-  applicationId: string,
-  key: PhotoKey,
-  file: File
-): Promise<string> {
-  const ext = file.name.split(".").pop() ?? "jpg";
-  const path = `${applicationId}/${key}.${ext}`;
-
-  const { error } = await supabase.storage
-    .from("applicant-photos")
-    .upload(path, file, { upsert: true });
-
-  if (error) throw new Error(`Photo upload failed (${key}): ${error.message}`);
-
-  const { data } = supabase.storage
-    .from("applicant-photos")
-    .getPublicUrl(path);
-
-  return data.publicUrl;
-}
-
 export async function submitApplication(payload: SubmitPayload): Promise<void> {
-  // Generate an ID upfront so photo paths are tied to the record
-  const applicationId = crypto.randomUUID();
+  const form = new FormData();
+  form.append("firstName", payload.firstName);
+  form.append("lastName", payload.lastName);
+  form.append("email", payload.email);
+  form.append("phone", payload.phone);
+  form.append("age", payload.age);
+  form.append("cityState", payload.cityState);
+  form.append("hairLossStory", payload.hairLossStory);
+  form.append("whyMe", payload.whyMe);
+  form.append("consent", String(payload.consent));
 
-  // Upload all photos in parallel
-  const photoKeys: PhotoKey[] = ["front", "top", "back", "side"];
-  const photoUrls = await Promise.all(
-    photoKeys.map((key) =>
-      payload.photos[key]
-        ? uploadPhoto(applicationId, key, payload.photos[key]!)
-        : Promise.resolve(null)
-    )
-  );
-
-  const [frontUrl, topUrl, backUrl, sideUrl] = photoUrls;
-
-  const { error } = await supabase.from("applications").insert({
-    id: applicationId,
-    first_name: payload.firstName,
-    last_name: payload.lastName,
-    email: payload.email,
-    phone: payload.phone,
-    age: parseInt(payload.age, 10),
-    city_state: payload.cityState,
-    hair_loss_story: payload.hairLossStory,
-    why_me: payload.whyMe,
-    photo_front_url: frontUrl,
-    photo_top_url: topUrl,
-    photo_back_url: backUrl,
-    photo_side_url: sideUrl,
-    consent: payload.consent,
-    status: "pending",
+  (["front", "top", "back", "side"] as PhotoKey[]).forEach((key) => {
+    const file = payload.photos[key];
+    if (file) form.append(`photo_${key}`, file);
   });
 
-  if (error) throw new Error(`Application insert failed: ${error.message}`);
+  const res = await fetch("/api/submit", { method: "POST", body: form });
+
+  if (!res.ok) {
+    const data = await res.json().catch(() => ({ error: "Submission failed." }));
+    throw new Error(data.error ?? "Submission failed.");
+  }
 }
