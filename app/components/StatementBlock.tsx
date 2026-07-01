@@ -103,10 +103,9 @@ export default function StatementBlock() {
                 border: "1px solid rgba(9,9,9,0.35)",
               }}
             >
-              {/* Placeholder headshot — swap for Matt's real photo before launch */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80"
+                src="/assets/images/matt-iulo.png"
                 alt="Matt Iulo, Founder of Scalp Micro USA"
                 className="absolute inset-0 w-full h-full object-cover"
                 style={{ filter: "grayscale(1) contrast(1.05)" }}
