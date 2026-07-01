@@ -4,6 +4,7 @@ import MarqueeTicker from "./components/MarqueeTicker";
 import Offer from "./components/Offer";
 import SectionDivider from "./components/SectionDivider";
 import SMPInfo from "./components/SMPInfo";
+import StatementBlock from "./components/StatementBlock";
 import ApplicationForm from "./components/ApplicationForm";
 import Footer from "./components/Footer";
 
@@ -17,7 +18,7 @@ export default function Home() {
         <Offer />
         <SectionDivider />
         <SMPInfo />
-        <SectionDivider />
+        <StatementBlock />
         <ApplicationForm />
       </main>
       <Footer />

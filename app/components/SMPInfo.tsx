@@ -23,11 +23,12 @@ const features = [
   },
 ];
 
+// NOTE: placeholder stock imagery — swap for real client before/after photos before launch.
 const galleryPlaceholders = [
-  { label: "Before", sub: "Client photo will appear here" },
-  { label: "After", sub: "Client photo will appear here" },
-  { label: "Session", sub: "Client photo will appear here" },
-  { label: "Result", sub: "Client photo will appear here" },
+  { label: "Before", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&q=80" },
+  { label: "After", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80" },
+  { label: "Session", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&q=80" },
+  { label: "Result", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80" },
 ];
 
 export default function SMPInfo() {
@@ -150,24 +151,39 @@ export default function SMPInfo() {
             {galleryPlaceholders.map((item, i) => (
               <div
                 key={i}
-                className="aspect-square flex flex-col items-center justify-center rounded-sm"
-                style={{
-                  background: "var(--color-surface-elevated)",
-                  border: "1px solid var(--color-border)",
-                }}
+                className="relative aspect-square overflow-hidden rounded-sm group"
+                style={{ border: "1px solid var(--color-border)" }}
               >
-                <p
-                  className="text-xs font-semibold uppercase tracking-widest mb-1"
-                  style={{ color: "var(--color-text-muted)" }}
-                >
-                  {item.label}
-                </p>
-                <p
-                  className="text-[10px] text-center px-4"
-                  style={{ color: "var(--color-text-muted)", opacity: 0.4 }}
-                >
-                  {item.sub}
-                </p>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={item.img}
+                  alt={`${item.label} — placeholder`}
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  style={{ filter: "grayscale(1) contrast(1.05)" }}
+                />
+                {/* Dark gradient for label legibility */}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      "linear-gradient(to top, rgba(9,9,9,0.85) 0%, rgba(9,9,9,0.1) 45%, rgba(9,9,9,0.15) 100%)",
+                  }}
+                />
+                <div className="absolute inset-x-0 bottom-0 flex items-center justify-between px-3 py-2.5">
+                  <span
+                    className="text-[10px] font-semibold uppercase tracking-widest"
+                    style={{ color: "var(--color-text-primary)" }}
+                  >
+                    {item.label}
+                  </span>
+                  <span
+                    className="text-[8px] uppercase tracking-wider"
+                    style={{ color: "var(--color-text-muted)" }}
+                  >
+                    Placeholder
+                  </span>
+                </div>
               </div>
             ))}
           </div>
