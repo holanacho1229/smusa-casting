@@ -63,24 +63,24 @@ export default function StatementBlock() {
         </h2>
 
         <div
-          className={`flex flex-col md:flex-row md:items-end md:justify-between gap-10 transition-all duration-700 ${
-            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          className={`flex flex-col lg:flex-row lg:items-stretch lg:justify-between gap-10 transition-opacity duration-700 ${
+            visible ? "opacity-100" : "opacity-0"
           }`}
           style={{ transitionDelay: "260ms" }}
         >
           {/* Left — copy + CTA */}
-          <div className="max-w-xl">
+          <div className="max-w-xl flex flex-col justify-end">
             <p
               className="text-lg leading-relaxed font-light mb-8"
-              style={{ color: "rgba(9,9,9,0.8)", maxWidth: "48ch" }}
+              style={{ color: "rgba(9,9,9,0.82)", maxWidth: "42ch" }}
             >
-              Every month, Matt covers the entire cost of an SMP transformation for
-              a handful of people — in exchange for sharing their journey on camera.
-              No catch, no fee. Just your story.
+              Every month we fully sponsor a handful of SMP transformations —
+              no cost, no catch. Selection is personal, and every story is
+              documented from first session to final result.
             </p>
             <a
               href="#apply"
-              className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.18em] uppercase transition-colors duration-200"
+              className="self-start inline-flex items-center gap-2 text-xs font-semibold tracking-[0.18em] uppercase transition-colors duration-200"
               style={{
                 background: "var(--color-bg)",
                 color: "var(--color-text-primary)",
@@ -93,37 +93,42 @@ export default function StatementBlock() {
             </a>
           </div>
 
-          {/* Right — founder portrait */}
-          <figure className="shrink-0 flex items-end gap-4">
-            <div
-              className="relative overflow-hidden"
-              style={{
-                width: "132px",
-                height: "160px",
-                border: "1px solid rgba(9,9,9,0.35)",
-              }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/assets/images/matt-iulo.png"
-                alt="Matt Iulo, Founder of Scalp Micro USA"
-                className="absolute inset-0 w-full h-full object-cover"
-                style={{ filter: "grayscale(1) contrast(1.05)" }}
-              />
-            </div>
-            <figcaption className="pb-1">
+          {/* Right — "from the founder" card. Sits ABOVE the grain overlay
+              (relative z-[60]) on a solid dark panel so the portrait stays crisp. */}
+          <figure
+            className="relative z-[60] shrink-0 flex w-full lg:w-auto lg:max-w-md overflow-hidden"
+            style={{ background: "var(--color-surface)", border: "1px solid rgba(9,9,9,0.4)" }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/assets/images/matt-iulo.png"
+              alt="Matt Iulo, Founder of Scalp Micro USA"
+              className="w-[130px] sm:w-[160px] shrink-0 object-cover object-top self-stretch"
+              style={{ filter: "grayscale(1)" }}
+            />
+            <figcaption className="flex flex-col justify-between gap-6 p-6">
               <p
-                className="text-sm font-semibold uppercase tracking-wide"
-                style={{ fontFamily: "var(--font-syne)", color: "var(--color-bg)" }}
+                className="text-[15px] leading-relaxed font-light"
+                style={{ color: "var(--color-text-primary)" }}
               >
-                Matt Iulo
+                &ldquo;I&rsquo;ve sat where you&rsquo;re sitting. This is my way of
+                handing that confidence to someone who needs it — all you bring
+                is your story.&rdquo;
               </p>
-              <p
-                className="text-[11px] tracking-[0.15em] uppercase mt-1"
-                style={{ color: "rgba(9,9,9,0.65)" }}
-              >
-                Founder — Scalp Micro USA
-              </p>
+              <div>
+                <p
+                  className="text-sm font-bold uppercase tracking-wide"
+                  style={{ fontFamily: "var(--font-syne)", color: "var(--color-text-primary)" }}
+                >
+                  Matt Iulo
+                </p>
+                <p
+                  className="text-[10px] tracking-[0.18em] uppercase mt-1"
+                  style={{ color: "var(--color-text-muted)" }}
+                >
+                  Founder — Scalp Micro USA
+                </p>
+              </div>
             </figcaption>
           </figure>
         </div>
