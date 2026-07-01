@@ -63,32 +63,70 @@ export default function StatementBlock() {
         </h2>
 
         <div
-          className={`flex flex-col md:flex-row md:items-end md:justify-between gap-8 transition-all duration-700 ${
+          className={`flex flex-col md:flex-row md:items-end md:justify-between gap-10 transition-all duration-700 ${
             visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
           }`}
           style={{ transitionDelay: "260ms" }}
         >
-          <p
-            className="text-lg leading-relaxed font-light"
-            style={{ color: "rgba(9,9,9,0.8)", maxWidth: "48ch" }}
-          >
-            Every month, Matt covers the entire cost of an SMP transformation for
-            a handful of people — in exchange for sharing their journey on camera.
-            No catch, no fee. Just your story.
-          </p>
-          <a
-            href="#apply"
-            className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.18em] uppercase transition-colors duration-200 shrink-0"
-            style={{
-              background: "var(--color-bg)",
-              color: "var(--color-text-primary)",
-              padding: "0.9rem 1.75rem",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "#000")}
-            onMouseLeave={(e) => (e.currentTarget.style.background = "var(--color-bg)")}
-          >
-            Apply For This Month →
-          </a>
+          {/* Left — copy + CTA */}
+          <div className="max-w-xl">
+            <p
+              className="text-lg leading-relaxed font-light mb-8"
+              style={{ color: "rgba(9,9,9,0.8)", maxWidth: "48ch" }}
+            >
+              Every month, Matt covers the entire cost of an SMP transformation for
+              a handful of people — in exchange for sharing their journey on camera.
+              No catch, no fee. Just your story.
+            </p>
+            <a
+              href="#apply"
+              className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.18em] uppercase transition-colors duration-200"
+              style={{
+                background: "var(--color-bg)",
+                color: "var(--color-text-primary)",
+                padding: "0.9rem 1.75rem",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "#000")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "var(--color-bg)")}
+            >
+              Apply For This Month →
+            </a>
+          </div>
+
+          {/* Right — founder portrait */}
+          <figure className="shrink-0 flex items-end gap-4">
+            <div
+              className="relative overflow-hidden"
+              style={{
+                width: "132px",
+                height: "160px",
+                border: "1px solid rgba(9,9,9,0.35)",
+              }}
+            >
+              {/* Placeholder headshot — swap for Matt's real photo before launch */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80"
+                alt="Matt Iulo, Founder of Scalp Micro USA"
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ filter: "grayscale(1) contrast(1.05)" }}
+              />
+            </div>
+            <figcaption className="pb-1">
+              <p
+                className="text-sm font-semibold uppercase tracking-wide"
+                style={{ fontFamily: "var(--font-syne)", color: "var(--color-bg)" }}
+              >
+                Matt Iulo
+              </p>
+              <p
+                className="text-[11px] tracking-[0.15em] uppercase mt-1"
+                style={{ color: "rgba(9,9,9,0.65)" }}
+              >
+                Founder — Scalp Micro USA
+              </p>
+            </figcaption>
+          </figure>
         </div>
       </div>
     </section>
