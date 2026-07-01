@@ -19,25 +19,34 @@ export default function Hero() {
     >
       {/* Cinematic background */}
       <div className="absolute inset-0 z-0">
-        {/* Placeholder portrait — swap for hero video/still before launch */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=1200&q=80"
-          alt=""
+        {/* Hero background video — drop your file at public/assets/video/hero.mp4.
+            Falls back to the poster still until the file exists. */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          poster="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=1200&q=80"
           aria-hidden="true"
-          className="absolute inset-y-0 right-0 h-full w-[60%] object-cover"
-          style={{
-            filter: "grayscale(1) contrast(1.05)",
-            opacity: 0.28,
-            WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 60%)",
-            maskImage: "linear-gradient(to right, transparent 0%, black 60%)",
-          }}
-        />
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ filter: "grayscale(0.4) contrast(1.05)" }}
+        >
+          <source src="/assets/video/hero.mp4" type="video/mp4" />
+        </video>
+        {/* Legibility overlay — heavy on the left for headline contrast */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 70% 55% at 40% 45%, rgba(30,26,24,0.85) 0%, rgba(13,11,10,0.7) 50%, rgba(9,9,9,0.55) 100%)",
+              "linear-gradient(to right, rgba(9,9,9,0.92) 0%, rgba(9,9,9,0.62) 52%, rgba(9,9,9,0.42) 100%)",
+          }}
+        />
+        {/* Vertical darken — grounds the bottom labels / casting card */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to top, rgba(9,9,9,0.7) 0%, rgba(9,9,9,0) 38%)",
           }}
         />
         <div
