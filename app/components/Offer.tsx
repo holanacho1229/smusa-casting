@@ -71,16 +71,27 @@ export default function Offer() {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div
-          className={`mb-20 transition-all duration-700 ${
+          className={`mb-14 transition-all duration-700 ${
             visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <p
-            className="text-xs tracking-[0.25em] uppercase mb-5"
-            style={{ color: "var(--color-accent)" }}
+          <div
+            className="flex items-center justify-between mb-8"
+            style={{ borderTop: "1px solid var(--color-border)", paddingTop: "1.1rem" }}
           >
-            The Exchange
-          </p>
+            <span
+              className="text-xs tracking-[0.25em] uppercase"
+              style={{ color: "var(--color-accent)" }}
+            >
+              The Offer — How It Works
+            </span>
+            <span
+              className="text-[11px] tracking-[0.25em] uppercase"
+              style={{ color: "var(--color-text-muted)" }}
+            >
+              01 <span style={{ opacity: 0.4 }}>/ 03</span>
+            </span>
+          </div>
           <h2
             className="font-black uppercase leading-[0.9] tracking-tight mb-6"
             style={{
@@ -89,21 +100,32 @@ export default function Offer() {
               color: "var(--color-text-primary)",
             }}
           >
-            The Documentary<br />Project.
+            The SMP Documentary<br />Project.
           </h2>
           <p
-            className="text-base leading-relaxed font-light"
-            style={{ color: "var(--color-text-muted)", maxWidth: "52ch" }}
+            className="leading-relaxed font-light"
+            style={{
+              color: "rgba(240,237,230,0.72)",
+              maxWidth: "54ch",
+              fontSize: "clamp(1.05rem, 1.5vw, 1.35rem)",
+            }}
           >
-            We are looking for real stories. In exchange for documenting your
-            hair loss journey and treatment on camera, we are fully sponsoring
-            select SMP transformations. New stories are selected every month.
+            Each month, we{" "}
+            <span style={{ color: "var(--color-text-primary)", fontWeight: 500 }}>
+              fully sponsor SMP treatments
+            </span>{" "}
+            for a select few — at no cost to you. In return, you let us{" "}
+            <span style={{ color: "var(--color-text-primary)", fontWeight: 500 }}>
+              film your journey on camera
+            </span>
+            , before and after. Your story shows others living with hair loss
+            what&apos;s possible.
           </p>
         </div>
 
         {/* Divider */}
         <div
-          className="w-full mb-20 opacity-20"
+          className="w-full mb-14 opacity-20"
           style={{ height: "1px", background: "var(--color-text-muted)" }}
         />
 

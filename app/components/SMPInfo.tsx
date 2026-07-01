@@ -62,12 +62,23 @@ export default function SMPInfo() {
             visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <p
-            className="text-xs tracking-[0.25em] uppercase mb-5"
-            style={{ color: "var(--color-accent)" }}
+          <div
+            className="flex items-center justify-between mb-8"
+            style={{ borderTop: "1px solid var(--color-border)", paddingTop: "1.1rem" }}
           >
-            What is SMP?
-          </p>
+            <span
+              className="text-xs tracking-[0.25em] uppercase"
+              style={{ color: "var(--color-accent)" }}
+            >
+              What is SMP?
+            </span>
+            <span
+              className="text-[11px] tracking-[0.25em] uppercase"
+              style={{ color: "var(--color-text-muted)" }}
+            >
+              02 <span style={{ opacity: 0.4 }}>/ 03</span>
+            </span>
+          </div>
           <h2
             className="font-black uppercase leading-[0.9] tracking-tight"
             style={{

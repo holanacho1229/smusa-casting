@@ -10,7 +10,7 @@
   --color-text-muted: #7a7774;
   --color-accent: #e8401c;
   --color-accent-hover: #ff5533;
-  --section-padding: clamp(5rem, 9vw, 9rem);
+  --section-padding: clamp(3.5rem, 6vw, 6rem);
 }
 
 @theme inline {

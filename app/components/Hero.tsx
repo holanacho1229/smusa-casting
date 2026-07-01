@@ -27,7 +27,7 @@ export default function Hero() {
           }}
         />
         <div
-          className="absolute inset-0 opacity-[0.035]"
+          className="absolute inset-0 opacity-[0.015]"
           style={{
             backgroundImage:
               "linear-gradient(var(--color-border) 1px, transparent 1px), linear-gradient(90deg, var(--color-border) 1px, transparent 1px)",
@@ -43,23 +43,45 @@ export default function Hero() {
         />
       </div>
 
+      {/* Registration frame — corner marks, dossier device */}
+      <CornerMarks inset={px} visible={visible} />
+
       {/* Nav */}
       <nav
         className="relative z-10 flex items-center justify-between pt-8"
         style={{ paddingLeft: px, paddingRight: px }}
       >
-        <span
-          className="text-[10px] tracking-[0.3em] uppercase font-medium"
-          style={{ color: "var(--color-text-muted)" }}
-        >
-          Scalp Micro USA
-        </span>
+        <div className="flex items-baseline gap-3">
+          <span
+            className="text-[11px] tracking-[0.28em] uppercase font-semibold"
+            style={{ color: "var(--color-text-primary)" }}
+          >
+            Scalp Micro USA
+            <span style={{ color: "var(--color-accent)" }}>®</span>
+          </span>
+          <span
+            className="hidden sm:inline text-[10px] tracking-[0.2em] uppercase"
+            style={{ color: "var(--color-text-muted)" }}
+          >
+            / Documentary Casting
+          </span>
+        </div>
         <a
           href="#apply"
-          className="inline-flex items-center gap-2 text-[10px] tracking-[0.25em] uppercase font-medium transition-colors duration-200"
-          style={{ color: "var(--color-text-muted)" }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-text-primary)")}
-          onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-text-muted)")}
+          className="inline-flex items-center gap-2 text-[10px] tracking-[0.22em] uppercase font-semibold transition-colors duration-200"
+          style={{
+            color: "var(--color-text-primary)",
+            border: "1px solid var(--color-border)",
+            padding: "0.55rem 1rem",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.borderColor = "var(--color-accent)";
+            e.currentTarget.style.background = "var(--color-accent)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.borderColor = "var(--color-border)";
+            e.currentTarget.style.background = "transparent";
+          }}
         >
           Apply Now <span style={{ color: "var(--color-accent)" }}>↗</span>
         </a>
@@ -99,13 +121,7 @@ export default function Hero() {
         >
           Share Your<br />
           Story.<br />
-          <span
-            style={{
-              WebkitTextStroke: "1.5px var(--color-accent)",
-              WebkitTextFillColor: "transparent",
-              color: "transparent",
-            }}
-          >
+          <span style={{ color: "var(--color-accent)" }}>
             Transform
           </span>{" "}
           Your Life.
@@ -144,6 +160,85 @@ export default function Hero() {
             Apply Now →
           </a>
         </div>
+
+        {/* Casting card — fills the right void, echoes Mattis's framed block */}
+        <div
+          className={`hidden lg:block absolute transition-all duration-700 ${
+            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+          style={{
+            right: px,
+            bottom: "clamp(7rem, 15vh, 11rem)",
+            width: "252px",
+            border: "1px solid var(--color-border)",
+            background: "rgba(20,20,20,0.35)",
+            backdropFilter: "blur(2px)",
+            transitionDelay: "420ms",
+          }}
+        >
+          <div
+            className="flex items-center justify-between px-5 py-3"
+            style={{ borderBottom: "1px solid var(--color-border)" }}
+          >
+            <span
+              className="text-[10px] tracking-[0.22em] uppercase font-semibold"
+              style={{ color: "var(--color-text-primary)" }}
+            >
+              Now Casting
+            </span>
+            <span
+              className="w-1.5 h-1.5 rounded-full"
+              style={{ background: "var(--color-accent)" }}
+            />
+          </div>
+          <ul className="px-5 py-4 space-y-3">
+            {[
+              "100% sponsored SMP",
+              "Documented on camera",
+              "New stories monthly",
+            ].map((line) => (
+              <li key={line} className="flex items-start gap-2.5">
+                <span
+                  className="mt-1.5 w-1 h-1 shrink-0"
+                  style={{ background: "var(--color-accent)" }}
+                />
+                <span
+                  className="text-[13px] leading-snug font-light"
+                  style={{ color: "var(--color-text-muted)" }}
+                >
+                  {line}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {/* Bottom micro-label row — encodes real state, dossier device */}
+      <div
+        className={`absolute bottom-8 z-10 flex items-center gap-6 transition-all duration-700 ${
+          visible ? "opacity-100" : "opacity-0"
+        }`}
+        style={{ left: px, transitionDelay: "600ms" }}
+      >
+        {["Applications — Open", "Fully Sponsored", "Selected Monthly"].map(
+          (label, i) => (
+            <span key={label} className="flex items-center gap-6">
+              {i > 0 && (
+                <span
+                  className="w-px h-3"
+                  style={{ background: "var(--color-border)" }}
+                />
+              )}
+              <span
+                className="text-[10px] tracking-[0.2em] uppercase whitespace-nowrap"
+                style={{ color: "var(--color-text-muted)" }}
+              >
+                {label}
+              </span>
+            </span>
+          )
+        )}
       </div>
 
       {/* Scroll indicator */}
@@ -159,11 +254,34 @@ export default function Hero() {
         >
           Scroll
         </span>
-        <div
-          className="w-px h-12"
-          style={{ background: "var(--color-border)" }}
-        />
+        <div className="w-px h-12" style={{ background: "var(--color-border)" }} />
       </div>
     </section>
+  );
+}
+
+// Four L-shaped corner marks framing the hero — registration/viewfinder device.
+function CornerMarks({ inset, visible }: { inset: string; visible: boolean }) {
+  const size = "14px";
+  const color = "var(--color-border)";
+  const corners = [
+    { top: inset, left: inset, borderTop: `1px solid ${color}`, borderLeft: `1px solid ${color}` },
+    { top: inset, right: inset, borderTop: `1px solid ${color}`, borderRight: `1px solid ${color}` },
+    { bottom: inset, left: inset, borderBottom: `1px solid ${color}`, borderLeft: `1px solid ${color}` },
+    { bottom: inset, right: inset, borderBottom: `1px solid ${color}`, borderRight: `1px solid ${color}` },
+  ];
+  return (
+    <>
+      {corners.map((c, i) => (
+        <div
+          key={i}
+          aria-hidden="true"
+          className={`absolute z-10 pointer-events-none transition-opacity duration-1000 ${
+            visible ? "opacity-100" : "opacity-0"
+          }`}
+          style={{ width: size, height: size, transitionDelay: "500ms", ...c }}
+        />
+      ))}
+    </>
   );
 }
