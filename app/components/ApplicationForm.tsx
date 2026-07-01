@@ -570,7 +570,7 @@ function Step4({
 
       {/* Summary */}
       <div
-        className="mb-8 p-6 grid grid-cols-2 gap-x-8 gap-y-3"
+        className="mb-8 p-6 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3"
         style={{
           background: "var(--color-surface-elevated)",
           border: "1px solid var(--color-border)",

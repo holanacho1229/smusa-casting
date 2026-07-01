@@ -230,7 +230,7 @@ export default function Hero() {
 
       {/* Bottom micro-label row — encodes real state, dossier device */}
       <div
-        className={`absolute bottom-8 z-10 flex items-center gap-6 transition-all duration-700 ${
+        className={`absolute bottom-8 z-10 hidden md:flex items-center gap-6 transition-all duration-700 ${
           visible ? "opacity-100" : "opacity-0"
         }`}
         style={{ left: px, transitionDelay: "600ms" }}
@@ -257,7 +257,7 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <div
-        className={`absolute bottom-8 z-10 flex flex-col items-center gap-2 transition-all duration-700 ${
+        className={`absolute bottom-8 z-10 hidden md:flex flex-col items-center gap-2 transition-all duration-700 ${
           visible ? "opacity-100" : "opacity-0"
         }`}
         style={{ right: px, transitionDelay: "600ms" }}
