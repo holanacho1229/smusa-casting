@@ -33,7 +33,7 @@ const steps = [
   {
     label: "Film & Transform",
     description:
-      "Receive your fully sponsored SMP treatment. Your journey — before, during, and after — is documented for the world.",
+      "Receive your fully sponsored SMP treatment. Your journey — before, during, and after — is documented to help others discover this amazing hair loss solution.",
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
         <rect x="3" y="8" width="16" height="12" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>

@@ -17,7 +17,7 @@ const features = [
   },
   {
     title: "Permanent",
-    body: "Unlike topical solutions or medications, SMP is a lasting solution. A single touch-up every few years maintains a sharp, clean look.",
+    body: "Unlike topical solutions or medications, SMP is a lasting solution. A small touch-up every 4-6 years maintains the natural looking results.",
     stat: "10+",
     statLabel: "Years of confidence",
   },

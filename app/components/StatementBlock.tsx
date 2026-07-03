@@ -69,14 +69,14 @@ export default function StatementBlock() {
           style={{ transitionDelay: "260ms" }}
         >
           {/* Left — copy + CTA */}
-          <div className="max-w-xl flex flex-col justify-end">
+          <div className="max-w-xl flex flex-col justify-between">
             <p
               className="text-lg leading-relaxed font-light mb-8"
               style={{ color: "rgba(9,9,9,0.82)", maxWidth: "42ch" }}
             >
-              Every month we fully sponsor a handful of SMP transformations —
-              no cost, no catch. Selection is personal, and every story is
-              documented from first session to final result.
+              Your SMP transformation can be the evidence another hair loss
+              sufferer needs to change their life. Share your journey to pay it
+              forward — and we&rsquo;ll cover the costs.
             </p>
             <a
               href="#apply"
@@ -97,37 +97,52 @@ export default function StatementBlock() {
               (relative z-[60]) on a solid dark panel so the portrait stays crisp. */}
           <figure
             className="relative z-[60] shrink-0 flex w-full lg:w-auto lg:max-w-md overflow-hidden"
-            style={{ background: "var(--color-surface)", border: "1px solid rgba(9,9,9,0.4)" }}
+            style={{
+              background: "var(--color-surface)",
+              border: "1px solid rgba(240,237,230,0.14)",
+              boxShadow: "0 20px 50px -20px rgba(0,0,0,0.55)",
+            }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/assets/images/matt-iulo.png"
+              src="/assets/images/matt-iulo-portrait.png"
               alt="Matt Iulo, Founder of Scalp Micro USA"
-              className="w-[130px] sm:w-[160px] shrink-0 object-cover object-top self-stretch"
-              style={{ filter: "grayscale(1)" }}
+              className="w-[140px] sm:w-[176px] shrink-0 object-cover object-top self-stretch"
+              style={{
+                filter: "grayscale(1)",
+                borderRight: "1px solid rgba(240,237,230,0.12)",
+              }}
             />
-            <figcaption className="flex flex-col justify-between gap-6 p-6">
+            <figcaption className="flex flex-col justify-between gap-5 p-6 lg:p-7">
               <p
                 className="text-[15px] leading-relaxed font-light"
                 style={{ color: "var(--color-text-primary)" }}
               >
-                &ldquo;I&rsquo;ve sat where you&rsquo;re sitting. This is my way of
+                <span style={{ color: "var(--color-accent)" }}>&ldquo;</span>
+                I&rsquo;ve sat where you&rsquo;re sitting. This is my way of
                 handing that confidence to someone who needs it — all you bring
-                is your story.&rdquo;
+                is your story.
+                <span style={{ color: "var(--color-accent)" }}>&rdquo;</span>
               </p>
-              <div>
-                <p
-                  className="text-sm font-bold uppercase tracking-wide"
-                  style={{ fontFamily: "var(--font-syne)", color: "var(--color-text-primary)" }}
-                >
-                  Matt Iulo
-                </p>
-                <p
-                  className="text-[10px] tracking-[0.18em] uppercase mt-1"
-                  style={{ color: "var(--color-text-muted)" }}
-                >
-                  Founder — Scalp Micro USA
-                </p>
+              <div className="flex items-center gap-3">
+                <span
+                  className="h-px w-6 shrink-0"
+                  style={{ background: "var(--color-accent)" }}
+                />
+                <div>
+                  <p
+                    className="text-sm font-bold uppercase tracking-wide"
+                    style={{ fontFamily: "var(--font-syne)", color: "var(--color-text-primary)" }}
+                  >
+                    Matt Iulo
+                  </p>
+                  <p
+                    className="text-[10px] tracking-[0.18em] uppercase mt-1"
+                    style={{ color: "var(--color-text-muted)" }}
+                  >
+                    Founder — Scalp Micro USA
+                  </p>
+                </div>
               </div>
             </figcaption>
           </figure>
