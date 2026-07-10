@@ -33,10 +33,12 @@
   }
 }
 
+/* Only box-sizing here. Do NOT reset margin/padding on `*` — as an unlayered
+   rule it overrides Tailwind's layered spacing utilities (mb-*, p-*, etc.),
+   silently zeroing them. Element default margins are handled by Tailwind's
+   Preflight. */
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 html {

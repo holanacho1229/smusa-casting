@@ -49,13 +49,14 @@ export default function StatementBlock() {
         </div>
 
         <h2
-          className={`font-black uppercase leading-[0.9] tracking-tight mb-8 transition-all duration-700 ${
+          className={`font-black uppercase leading-[0.9] tracking-tight transition-all duration-700 ${
             visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
           style={{
             fontFamily: "var(--font-syne)",
             fontSize: "clamp(2.5rem, 6.5vw, 6.5rem)",
             color: "var(--color-bg)",
+            marginBottom: "clamp(2.5rem, 4.5vw, 4rem)",
             transitionDelay: "120ms",
           }}
         >
@@ -68,8 +69,8 @@ export default function StatementBlock() {
           }`}
           style={{ transitionDelay: "260ms" }}
         >
-          {/* Left — copy + CTA */}
-          <div className="max-w-xl flex flex-col justify-between">
+          {/* Left — copy at top (near headline), CTA pinned to bottom to level with card */}
+          <div className="max-w-xl flex flex-col justify-between gap-10">
             <p
               className="text-lg leading-relaxed font-light mb-8"
               style={{ color: "rgba(9,9,9,0.82)", maxWidth: "42ch" }}
