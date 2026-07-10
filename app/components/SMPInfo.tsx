@@ -23,12 +23,12 @@ const features = [
   },
 ];
 
-// NOTE: placeholder stock imagery — swap for real client before/after photos before launch.
+// Before/After are real client photos. Session/Result remain stock placeholders.
 const galleryPlaceholders = [
-  { label: "Before", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&q=80" },
-  { label: "After", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80" },
-  { label: "Session", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&q=80" },
-  { label: "Result", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80" },
+  { label: "Before", img: "/assets/images/before.jpg", placeholder: false, position: "center 22%" },
+  { label: "After", img: "/assets/images/after.jpg", placeholder: false, position: "center 22%" },
+  { label: "Session", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&q=80", placeholder: true, position: "center" },
+  { label: "Result", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80", placeholder: true, position: "center" },
 ];
 
 export default function SMPInfo() {
@@ -157,10 +157,10 @@ export default function SMPInfo() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={item.img}
-                  alt={`${item.label} — placeholder`}
+                  alt={item.placeholder ? `${item.label} — placeholder` : `SMP ${item.label.toLowerCase()} — real client result`}
                   loading="lazy"
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  style={{ filter: "grayscale(1) contrast(1.05)" }}
+                  style={{ filter: "grayscale(0.5) sepia(0.22) saturate(1.15) contrast(1.03) brightness(1.02)", objectPosition: item.position }}
                 />
                 {/* Dark gradient for label legibility */}
                 <div
@@ -177,12 +177,14 @@ export default function SMPInfo() {
                   >
                     {item.label}
                   </span>
-                  <span
-                    className="text-[8px] uppercase tracking-wider"
-                    style={{ color: "var(--color-text-muted)" }}
-                  >
-                    Placeholder
-                  </span>
+                  {item.placeholder && (
+                    <span
+                      className="text-[8px] uppercase tracking-wider"
+                      style={{ color: "var(--color-text-muted)" }}
+                    >
+                      Placeholder
+                    </span>
+                  )}
                 </div>
               </div>
             ))}
