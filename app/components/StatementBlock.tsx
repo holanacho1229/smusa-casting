@@ -120,9 +120,9 @@ export default function StatementBlock() {
                 style={{ color: "var(--color-text-primary)" }}
               >
                 <span style={{ color: "var(--color-accent)" }}>&ldquo;</span>
-                I&rsquo;ve sat where you&rsquo;re sitting. This is my way of
-                handing that confidence to someone who needs it — all you bring
-                is your story.
+                We all know firsthand that hair loss can be devastating. This is
+                a great opportunity to change not only your life, but someone
+                else&rsquo;s too.
                 <span style={{ color: "var(--color-accent)" }}>&rdquo;</span>
               </p>
               <div className="flex items-center gap-3">

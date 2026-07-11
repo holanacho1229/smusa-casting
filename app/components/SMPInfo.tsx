@@ -23,12 +23,12 @@ const features = [
   },
 ];
 
-// Before/After are real client photos. Session/Result remain stock placeholders.
+// Two real before/after client transformations.
 const galleryPlaceholders = [
   { label: "Before", img: "/assets/images/before.jpg", placeholder: false, position: "center 22%" },
   { label: "After", img: "/assets/images/after.jpg", placeholder: false, position: "center 22%" },
-  { label: "Session", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&q=80", placeholder: true, position: "center" },
-  { label: "Result", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80", placeholder: true, position: "center" },
+  { label: "Before", img: "/assets/images/before2.jpg", placeholder: false, position: "center 30%" },
+  { label: "After", img: "/assets/images/after2.jpg", placeholder: false, position: "center 28%" },
 ];
 
 export default function SMPInfo() {
@@ -134,10 +134,12 @@ export default function SMPInfo() {
           ))}
         </div>
 
-        {/* Gallery grid — placeholders */}
+        {/* Gallery — two real before/after transformations, shown as two grouped
+            pairs. Lifted above the grain overlay (z-[60]) so the proof photos
+            render clean/unaltered while grain stays on the rest of the block. */}
         <div
-          className={`transition-all duration-700 ${
-            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          className={`transition-opacity duration-700 ${
+            visible ? "opacity-100" : "opacity-0"
           }`}
           style={{ transitionDelay: "300ms" }}
         >
@@ -147,45 +149,61 @@ export default function SMPInfo() {
           >
             Results — Before &amp; After
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {galleryPlaceholders.map((item, i) => (
+          <div className="relative z-[60] flex flex-col sm:flex-row items-stretch gap-5">
+            {[
+              [0, 1],
+              [2, 3],
+            ].map((pair, gi) => (
               <div
-                key={i}
-                className="relative aspect-square overflow-hidden rounded-sm group"
-                style={{ border: "1px solid var(--color-border)" }}
+                key={gi}
+                className={`grid grid-cols-2 gap-3 flex-1 ${
+                  gi === 1 ? "sm:border-l sm:pl-5" : ""
+                }`}
+                style={gi === 1 ? { borderColor: "var(--color-border)" } : undefined}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={item.img}
-                  alt={item.placeholder ? `${item.label} — placeholder` : `SMP ${item.label.toLowerCase()} — real client result`}
-                  loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  style={{ filter: "grayscale(0.5) sepia(0.22) saturate(1.15) contrast(1.03) brightness(1.02)", objectPosition: item.position }}
-                />
-                {/* Dark gradient for label legibility */}
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background:
-                      "linear-gradient(to top, rgba(9,9,9,0.85) 0%, rgba(9,9,9,0.1) 45%, rgba(9,9,9,0.15) 100%)",
-                  }}
-                />
-                <div className="absolute inset-x-0 bottom-0 flex items-center justify-between px-3 py-2.5">
-                  <span
-                    className="text-[10px] font-semibold uppercase tracking-widest"
-                    style={{ color: "var(--color-text-primary)" }}
-                  >
-                    {item.label}
-                  </span>
-                  {item.placeholder && (
-                    <span
-                      className="text-[8px] uppercase tracking-wider"
-                      style={{ color: "var(--color-text-muted)" }}
+                {pair.map((idx) => {
+                  const item = galleryPlaceholders[idx];
+                  return (
+                    <div
+                      key={idx}
+                      className="relative aspect-square overflow-hidden rounded-sm group"
+                      style={{ border: "1px solid var(--color-border)" }}
                     >
-                      Placeholder
-                    </span>
-                  )}
-                </div>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={item.img}
+                        alt={item.placeholder ? `${item.label} — placeholder` : `SMP ${item.label.toLowerCase()} — real client result`}
+                        loading="lazy"
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        style={{ filter: "grayscale(0.5) sepia(0.22) saturate(1.15) contrast(1.03) brightness(1.02)", objectPosition: item.position }}
+                      />
+                      {/* Dark gradient for label legibility */}
+                      <div
+                        className="absolute inset-0"
+                        style={{
+                          background:
+                            "linear-gradient(to top, rgba(9,9,9,0.85) 0%, rgba(9,9,9,0.1) 45%, rgba(9,9,9,0.15) 100%)",
+                        }}
+                      />
+                      <div className="absolute inset-x-0 bottom-0 flex items-center justify-between px-3 py-2.5">
+                        <span
+                          className="text-[10px] font-semibold uppercase tracking-widest"
+                          style={{ color: "var(--color-text-primary)" }}
+                        >
+                          {item.label}
+                        </span>
+                        {item.placeholder && (
+                          <span
+                            className="text-[8px] uppercase tracking-wider"
+                            style={{ color: "var(--color-text-muted)" }}
+                          >
+                            Placeholder
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             ))}
           </div>
