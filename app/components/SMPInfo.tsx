@@ -25,10 +25,10 @@ const features = [
 
 // Two real before/after client transformations.
 const galleryPlaceholders = [
-  { label: "Before", img: "/assets/images/before.jpg", placeholder: false, position: "center 22%" },
-  { label: "After", img: "/assets/images/after.jpg", placeholder: false, position: "center 22%" },
-  { label: "Before", img: "/assets/images/before2.jpg", placeholder: false, position: "center 30%" },
-  { label: "After", img: "/assets/images/after2.jpg", placeholder: false, position: "center 28%" },
+  { label: "Before", img: "/assets/images/smp-before-1.jpg", placeholder: false, position: "center 22%" },
+  { label: "After", img: "/assets/images/smp-after-1.jpg", placeholder: false, position: "center 22%" },
+  { label: "Before", img: "/assets/images/smp-before-2.jpg", placeholder: false, position: "center 30%" },
+  { label: "After", img: "/assets/images/smp-after-2.jpg", placeholder: false, position: "center 28%" },
 ];
 
 export default function SMPInfo() {
