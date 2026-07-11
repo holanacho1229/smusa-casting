@@ -166,7 +166,7 @@ export default function SMPInfo() {
                   return (
                     <div
                       key={idx}
-                      className="relative aspect-square overflow-hidden rounded-sm group"
+                      className="relative aspect-square overflow-hidden"
                       style={{ border: "1px solid var(--color-border)" }}
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -174,7 +174,7 @@ export default function SMPInfo() {
                         src={item.img}
                         alt={item.placeholder ? `${item.label} — placeholder` : `SMP ${item.label.toLowerCase()} — real client result`}
                         loading="lazy"
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="absolute inset-0 w-full h-full object-cover"
                         style={{ objectPosition: item.position }}
                       />
                       {/* Dark gradient for label legibility */}
