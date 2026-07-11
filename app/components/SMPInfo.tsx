@@ -175,7 +175,7 @@ export default function SMPInfo() {
                         alt={item.placeholder ? `${item.label} — placeholder` : `SMP ${item.label.toLowerCase()} — real client result`}
                         loading="lazy"
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        style={{ filter: "grayscale(0.5) sepia(0.22) saturate(1.15) contrast(1.03) brightness(1.02)", objectPosition: item.position }}
+                        style={{ objectPosition: item.position }}
                       />
                       {/* Dark gradient for label legibility */}
                       <div
