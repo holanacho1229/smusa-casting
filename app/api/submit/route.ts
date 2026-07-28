@@ -1,29 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabaseAdmin } from "../../lib/supabaseAdmin";
+import { createApplication, uploadPhoto } from "../../lib/airtable";
 import { sendAdminNotification, sendApplicantConfirmation } from "../../lib/emails";
 
-const BUCKET = "applicant photos";
 const PHOTO_KEYS = ["front", "top", "back", "side"] as const;
-type PhotoKey = (typeof PHOTO_KEYS)[number];
-
-async function uploadPhoto(
-  applicationId: string,
-  key: PhotoKey,
-  file: File
-): Promise<string> {
-  const ext = file.name.split(".").pop() ?? "jpg";
-  const path = `${applicationId}/${key}.${ext}`;
-  const buffer = Buffer.from(await file.arrayBuffer());
-
-  const { error } = await supabaseAdmin.storage
-    .from(BUCKET)
-    .upload(path, buffer, { contentType: file.type, upsert: true });
-
-  if (error) throw new Error(`Photo upload failed (${key}): ${error.message}`);
-
-  const { data } = supabaseAdmin.storage.from(BUCKET).getPublicUrl(path);
-  return data.publicUrl;
-}
 
 export async function POST(request: NextRequest) {
   try {
@@ -52,46 +31,35 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Consent is required." }, { status: 400 });
     }
 
-    const applicationId = crypto.randomUUID();
-
-    // Upload all four photos in parallel
-    const urls = await Promise.all(
-      PHOTO_KEYS.map((key) => {
-        const file = form.get(`photo_${key}`) as File | null;
-        return file && file.size > 0
-          ? uploadPhoto(applicationId, key, file)
-          : Promise.resolve(null);
-      })
-    );
-    const [frontUrl, topUrl, backUrl, sideUrl] = urls;
-
-    const { error } = await supabaseAdmin.from("applications").insert({
-      id: applicationId,
-      first_name: firstName,
-      last_name: lastName,
+    // 1) Create the Airtable record with the text data
+    const recordId = await createApplication({
+      firstName,
+      lastName,
       email,
       phone,
-      age: parseInt(age, 10),
-      city_state: cityState,
-      hair_loss_story: hairLossStory,
-      why_me: whyMe,
-      photo_front_url: frontUrl,
-      photo_top_url: topUrl,
-      photo_back_url: backUrl,
-      photo_side_url: sideUrl,
+      age,
+      cityState,
+      hairLossStory,
+      whyMe,
       consent,
-      status: "pending",
     });
 
-    if (error) {
-      return NextResponse.json(
-        { error: `Database error: ${error.message}` },
-        { status: 500 }
-      );
+    // 2) Upload the photos to the record (sequential — Airtable appends to the
+    //    attachment field, and concurrent appends can race). Non-fatal: a photo
+    //    hiccup shouldn't lose the application that's already saved.
+    for (const key of PHOTO_KEYS) {
+      const file = form.get(`photo_${key}`) as File | null;
+      if (file && file.size > 0) {
+        try {
+          await uploadPhoto(recordId, key, file);
+        } catch (photoErr) {
+          console.error(`Photo upload failed (${key}):`, photoErr);
+        }
+      }
     }
 
-    // Fire both emails — non-blocking. A mail failure must never fail the
-    // submission, since the record is already safely saved.
+    // 3) Fire both emails — non-blocking. A mail failure must never fail the
+    //    submission, since the record is already safely saved.
     const summary = {
       firstName,
       lastName,
@@ -101,7 +69,7 @@ export async function POST(request: NextRequest) {
       cityState,
       hairLossStory,
       whyMe,
-      applicationId,
+      applicationId: recordId,
     };
     try {
       await Promise.allSettled([

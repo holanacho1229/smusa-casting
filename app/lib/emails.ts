@@ -38,7 +38,7 @@ export async function sendAdminNotification(a: ApplicantSummary): Promise<void> 
         <p style="font-size:14px; margin-top:0; white-space:pre-wrap;">${escapeHtml(a.hairLossStory)}</p>
         <p style="font-size:13px; color:#888; margin-bottom:2px;">Why they're the right candidate</p>
         <p style="font-size:14px; margin-top:0; white-space:pre-wrap;">${escapeHtml(a.whyMe)}</p>
-        <p style="font-size:12px; color:#aaa;">View photos and full record in Supabase · ID ${a.applicationId}</p>
+        <p style="font-size:12px; color:#aaa;">View photos and full record in Airtable · Record ${a.applicationId}</p>
       </div>
     `,
   });
