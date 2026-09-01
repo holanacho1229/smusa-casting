@@ -96,7 +96,7 @@ export default function Offer() {
             className="font-black uppercase leading-[0.9] tracking-tight mb-6"
             style={{
               fontFamily: "var(--font-syne)",
-              fontSize: "clamp(2rem, 4.5vw, 4.5rem)",
+              fontSize: "clamp(1.4rem, 4.5vw, 4.5rem)",
               color: "var(--color-text-primary)",
             }}
           >

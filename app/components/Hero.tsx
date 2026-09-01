@@ -137,7 +137,7 @@ export default function Hero() {
           }`}
           style={{
             fontFamily: "var(--font-syne)",
-            fontSize: "clamp(2.8rem, 7vw, 7rem)",
+            fontSize: "clamp(1.75rem, 7vw, 7rem)",
             color: "var(--color-text-primary)",
             transitionDelay: "120ms",
           }}

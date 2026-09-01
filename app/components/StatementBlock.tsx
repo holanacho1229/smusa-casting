@@ -54,7 +54,7 @@ export default function StatementBlock() {
           }`}
           style={{
             fontFamily: "var(--font-syne)",
-            fontSize: "clamp(2.5rem, 6.5vw, 6.5rem)",
+            fontSize: "clamp(1.75rem, 6.5vw, 6.5rem)",
             color: "var(--color-bg)",
             marginBottom: "clamp(2.5rem, 4.5vw, 4rem)",
             transitionDelay: "120ms",
