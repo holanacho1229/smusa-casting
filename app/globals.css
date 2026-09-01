@@ -21,16 +21,20 @@
 
   --animate-marquee: marquee 28s linear infinite;
   --animate-fade-up: fade-up 0.7s ease forwards;
+}
 
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-  }
+/* Keyframes live at top level (not inside @theme) so they are always emitted.
+   Tailwind v4 only outputs @theme keyframes when referenced via the generated
+   animate-* utility; these are applied via inline `animation`, so they must be
+   defined globally or they resolve to nothing (no movement). */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
 
-  @keyframes fade-up {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 /* Only box-sizing here. Do NOT reset margin/padding on `*` — as an unlayered

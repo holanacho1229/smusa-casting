@@ -25,7 +25,7 @@ export default function MarqueeTicker() {
       aria-hidden="true"
     >
       <div
-        className="flex whitespace-nowrap"
+        className="flex w-max whitespace-nowrap"
         style={{ animation: "marquee 28s linear infinite" }}
       >
         {items.map((item, i) => (
