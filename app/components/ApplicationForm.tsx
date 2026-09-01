@@ -752,16 +752,17 @@ function Field({
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full px-4 py-3 text-sm bg-transparent outline-none transition-colors duration-200"
+        className="w-full px-4 py-3 text-sm outline-none transition-colors duration-200"
         style={{
-          border: `1px solid ${error ? "var(--color-accent)" : "var(--color-border)"}`,
+          background: "var(--color-input-bg)",
+          border: `1px solid ${error ? "var(--color-accent)" : "var(--color-input-border)"}`,
           color: "var(--color-text-primary)",
         }}
         onFocus={(e) =>
-          (e.currentTarget.style.borderColor = error ? "var(--color-accent)" : "var(--color-accent)")
+          (e.currentTarget.style.borderColor = "var(--color-accent)")
         }
         onBlur={(e) =>
-          (e.currentTarget.style.borderColor = error ? "var(--color-accent)" : "var(--color-border)")
+          (e.currentTarget.style.borderColor = error ? "var(--color-accent)" : "var(--color-input-border)")
         }
       />
       {error && (
@@ -806,16 +807,17 @@ function TextArea({
         rows={rows}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full px-4 py-3 text-sm bg-transparent outline-none resize-none transition-colors duration-200"
+        className="w-full px-4 py-3 text-sm outline-none resize-none transition-colors duration-200"
         style={{
-          border: `1px solid ${error ? "var(--color-accent)" : "var(--color-border)"}`,
+          background: "var(--color-input-bg)",
+          border: `1px solid ${error ? "var(--color-accent)" : "var(--color-input-border)"}`,
           color: "var(--color-text-primary)",
         }}
         onFocus={(e) =>
           (e.currentTarget.style.borderColor = "var(--color-accent)")
         }
         onBlur={(e) =>
-          (e.currentTarget.style.borderColor = error ? "var(--color-accent)" : "var(--color-border)")
+          (e.currentTarget.style.borderColor = error ? "var(--color-accent)" : "var(--color-input-border)")
         }
       />
       {error && (
@@ -855,7 +857,7 @@ function DropZone({
       onDrop={handleDrop}
       className="aspect-square flex flex-col items-center justify-center relative overflow-hidden transition-colors duration-200"
       style={{
-        border: `1px dashed ${dragging ? "var(--color-accent)" : "var(--color-border)"}`,
+        border: `1px dashed ${dragging ? "var(--color-accent)" : "var(--color-input-border)"}`,
         background: dragging ? "rgba(232,64,28,0.04)" : "var(--color-surface-elevated)",
         cursor: file ? "default" : "pointer",
       }}
