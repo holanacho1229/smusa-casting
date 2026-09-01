@@ -186,13 +186,12 @@ export default function Hero() {
 
         {/* Casting card — fills the right void, echoes Mattis's framed block */}
         <div
-          className={`hidden lg:block absolute transition-all duration-700 ${
+          className={`block mt-10 w-full max-w-sm lg:mt-0 lg:w-[252px] lg:max-w-none lg:absolute transition-all duration-700 ${
             visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
           style={{
             right: px,
             bottom: "clamp(7rem, 15vh, 11rem)",
-            width: "252px",
             border: "1px solid var(--color-border)",
             background: "rgba(20,20,20,0.35)",
             backdropFilter: "blur(2px)",
