@@ -16,7 +16,7 @@ const features = [
     statLabel: "Sessions total",
   },
   {
-    title: "Permanent",
+    title: "Long Term Solution",
     body: "Unlike topical solutions or medications, SMP is a lasting solution. A small touch-up every 4-6 years maintains the natural looking results.",
     stat: "10+",
     statLabel: "Years of confidence",

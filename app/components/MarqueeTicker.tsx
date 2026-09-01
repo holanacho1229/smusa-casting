@@ -31,11 +31,11 @@ export default function MarqueeTicker() {
         {items.map((item, i) => (
           <span
             key={i}
-            className="text-xs font-semibold tracking-[0.2em] uppercase mx-6"
+            className="text-[11px] sm:text-xs font-semibold tracking-[0.2em] uppercase mx-3 sm:mx-6"
             style={{ color: "var(--color-text-primary)" }}
           >
             {item}
-            <span className="mx-6 opacity-50">·</span>
+            <span className="mx-2.5 sm:mx-6 opacity-50">·</span>
           </span>
         ))}
       </div>
