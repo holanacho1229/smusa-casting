@@ -17,6 +17,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://smusa-casting.vercel.app"),
   title: "The Documentary Project — Scalp Micro USA",
   description:
     "Apply for a chance to receive a fully sponsored SMP treatment with Matt Iulo. Share your hair loss story and transform your life on camera.",
