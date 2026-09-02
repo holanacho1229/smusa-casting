@@ -4,6 +4,8 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 const FROM = process.env.EMAIL_FROM ?? "Scalp Micro USA <onboarding@resend.dev>";
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL ?? "matthew.iulo1@gmail.com";
+// Absolute base for email image assets (must be publicly reachable by mail clients).
+const BASE_URL = process.env.SITE_URL ?? "https://smusa-casting.vercel.app";
 
 interface ApplicantSummary {
   firstName: string;
@@ -71,11 +73,25 @@ export async function sendApplicantConfirmation(a: ApplicantSummary): Promise<vo
           <li>Selected candidates receive a fully sponsored SMP transformation.</li>
         </ul>
         <h3 style="font-size:15px; margin:24px 0 8px;">While you wait</h3>
-        <p style="font-size:14px; line-height:1.6; color:#333;">
+        <p style="font-size:14px; line-height:1.6; color:#333; margin-bottom:18px;">
           Learn more about Scalp Micro USA and see real transformations on our
-          <a href="https://scalpmicrousa.com" style="color:#e8401c;">main site</a>.
-          [Placeholder — add social proof, before/afters, FAQ links before launch.]
+          <a href="https://scalpmicrousa.com" style="color:#e8401c; text-decoration:none; font-weight:600;">main site</a>,
+          and follow the journey:
         </p>
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 4px;">
+          <tr>
+            <td style="padding-right:12px;">
+              <a href="https://www.instagram.com/scalpmicro_usa/" style="text-decoration:none;">
+                <img src="${BASE_URL}/social-instagram.png" width="40" height="40" alt="Follow on Instagram" style="display:block; border:0; outline:none;" />
+              </a>
+            </td>
+            <td>
+              <a href="https://www.tiktok.com/@scalpmicrousa" style="text-decoration:none;">
+                <img src="${BASE_URL}/social-tiktok.png" width="40" height="40" alt="Follow on TikTok" style="display:block; border:0; outline:none;" />
+              </a>
+            </td>
+          </tr>
+        </table>
         <p style="font-size:12px; color:#999; margin-top:32px;">
           Scalp Micro USA · The Documentary Project
         </p>
