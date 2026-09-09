@@ -72,3 +72,79 @@ h1, h2, h3, h4, h5 {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ── "The Offer — How It Works" steps ─────────────────────────────────────
+   Mobile-first: giant accent numerals with a vertical connector threaded
+   through evenly-spaced dots. Desktop (>=768px): 3 columns with a horizontal
+   connector. The line is drawn per-step so it stays continuous regardless of
+   row height; equal min-heights keep the dots evenly spaced. */
+.offer-steps { position: relative; }
+.offer-track { display: none; }
+
+.offer-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  column-gap: 18px;
+  align-items: start;
+  min-height: 224px;
+  padding: 16px 0;
+}
+.offer-step:not(:last-child)::after {
+  content: ""; position: absolute; left: 40px; right: 0; bottom: 0;
+  height: 1px; background: var(--color-border);
+}
+.offer-line {
+  position: absolute; left: 10px; width: 2px; top: 0; bottom: 0; border-radius: 2px;
+  background: linear-gradient(180deg, var(--color-border) 0%, rgba(232,64,28,0.5) 50%, var(--color-border) 100%);
+  transform: scaleY(0); transform-origin: top;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.1, 1) 0.15s;
+}
+.offer-step:first-child .offer-line { top: 33px; }
+.offer-step:last-child  .offer-line { bottom: calc(100% - 33px); }
+.offer-in .offer-line { transform: scaleY(1); }
+.offer-dot {
+  position: absolute; left: 5px; top: 33px; margin-top: -6px;
+  width: 12px; height: 12px; border-radius: 50%; background: var(--color-accent); z-index: 2;
+  box-shadow: 0 0 0 5px rgba(232,64,28,0.12), 0 0 16px rgba(232,64,28,0.55);
+}
+.offer-body { grid-column: 2; min-width: 0; }
+.offer-top { display: flex; align-items: center; gap: 13px; margin-bottom: 10px; }
+.offer-num {
+  font-family: var(--font-syne); font-weight: 800; font-size: 2.6rem; line-height: 0.8;
+  color: var(--color-accent); letter-spacing: -0.02em;
+}
+.offer-ico { color: var(--color-accent); display: flex; }
+.offer-ico svg { width: 24px; height: 24px; }
+.offer-label {
+  font-family: var(--font-syne); font-weight: 800; text-transform: uppercase; letter-spacing: 0.01em;
+  font-size: 1.3rem; line-height: 1; color: var(--color-text-primary); margin: 0 0 9px;
+}
+.offer-desc {
+  font-size: 13.5px; line-height: 1.65; font-weight: 300; color: var(--color-text-muted); margin: 0;
+}
+
+@media (min-width: 768px) {
+  .offer-steps { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .offer-track {
+    display: block; position: absolute; top: 27px; left: 16.667%; right: 16.667%;
+    height: 2px; border-radius: 2px;
+    background: linear-gradient(90deg, var(--color-border) 0%, rgba(232,64,28,0.55) 50%, var(--color-border) 100%);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 1.1s cubic-bezier(0.4, 0, 0.1, 1) 0.2s;
+  }
+  .offer-in .offer-track { transform: scaleX(1); }
+  .offer-step {
+    display: flex; flex-direction: column; align-items: flex-start;
+    min-height: 0; padding: 0 30px;
+  }
+  .offer-step:not(:last-child) { border-right: 1px solid var(--color-border); }
+  .offer-step:not(:last-child)::after { display: none; }
+  .offer-line { display: none; }
+  .offer-dot { position: static; align-self: center; margin: 21px 0 34px; }
+  .offer-top { margin-bottom: 18px; }
+  .offer-ico svg { width: 30px; height: 30px; }
+  .offer-num { font-size: clamp(3.2rem, 5.5vw, 4.6rem); }
+  .offer-label { font-size: 1.55rem; margin-bottom: 14px; }
+  .offer-desc { font-size: 14px; }
+}

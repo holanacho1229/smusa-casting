@@ -129,43 +129,30 @@ export default function Offer() {
           style={{ height: "1px", background: "var(--color-text-muted)" }}
         />
 
-        {/* Steps */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px" style={{ background: "var(--color-border)" }}>
+        {/* Steps — giant index numerals threaded by a connecting line */}
+        <div className={`offer-steps ${visible ? "offer-in" : ""}`}>
+          <div className="offer-track" aria-hidden="true" />
           {steps.map((step, i) => (
             <div
               key={step.label}
-              className={`p-10 transition-all duration-700 ${
-                visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-              }`}
+              className="offer-step"
               style={{
-                background: "var(--color-bg)",
+                opacity: visible ? 1 : 0,
+                transform: visible ? "translateY(0)" : "translateY(24px)",
+                transition: "opacity 0.7s ease, transform 0.7s ease",
                 transitionDelay: `${i * 120}ms`,
               }}
             >
-              <div
-                className="mb-8"
-                style={{ color: "var(--color-accent)" }}
-              >
-                {step.icon}
+              <span className="offer-line" aria-hidden="true" />
+              <span className="offer-dot" aria-hidden="true" />
+              <div className="offer-body">
+                <div className="offer-top">
+                  <span className="offer-num">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="offer-ico">{step.icon}</span>
+                </div>
+                <h3 className="offer-label">{step.label}</h3>
+                <p className="offer-desc">{step.description}</p>
               </div>
-              <p
-                className="text-[10px] tracking-[0.2em] uppercase mb-3"
-                style={{ color: "var(--color-text-muted)" }}
-              >
-                Step {String(i + 1).padStart(2, "0")}
-              </p>
-              <h3
-                className="text-xl font-bold mb-4 uppercase tracking-wide"
-                style={{ fontFamily: "var(--font-syne)", color: "var(--color-text-primary)" }}
-              >
-                {step.label}
-              </h3>
-              <p
-                className="text-sm leading-relaxed font-light"
-                style={{ color: "var(--color-text-muted)" }}
-              >
-                {step.description}
-              </p>
             </div>
           ))}
         </div>
