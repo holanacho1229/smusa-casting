@@ -1,13 +1,31 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Hero() {
   const [visible, setVisible] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const t = setTimeout(() => setVisible(true), 100);
     return () => clearTimeout(t);
+  }, []);
+
+  // Nudge autoplay: the declarative `autoPlay` attribute can be missed after
+  // hydration or before the file buffers, which leaves the poster showing. Call
+  // play() explicitly (and again once the browser can play) so the video starts
+  // reliably. Failures (e.g. iOS Low Power Mode) fall back to the poster frame.
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = true;
+    const tryPlay = () => {
+      const p = v.play();
+      if (p && typeof p.catch === "function") p.catch(() => {});
+    };
+    tryPlay();
+    v.addEventListener("canplay", tryPlay, { once: true });
+    return () => v.removeEventListener("canplay", tryPlay);
   }, []);
 
   const px = "clamp(1.5rem, 5vw, 5rem)";
@@ -22,11 +40,13 @@ export default function Hero() {
         {/* Hero background video — drop your file at public/assets/video/hero.mp4.
             Falls back to the poster still until the file exists. */}
         <video
+          ref={videoRef}
           autoPlay
           loop
           muted
           playsInline
-          poster="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=1200&q=80"
+          preload="auto"
+          poster="/assets/video/hero-poster.jpg"
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover"
           style={{ filter: "grayscale(0.4) contrast(1.05)" }}
