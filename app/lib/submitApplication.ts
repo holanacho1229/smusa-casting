@@ -1,3 +1,5 @@
+import { compressImage } from "./compressImage";
+
 type PhotoKey = "front" | "top" | "back" | "side";
 
 interface SubmitPayload {
@@ -25,8 +27,18 @@ export async function submitApplication(payload: SubmitPayload): Promise<void> {
   form.append("whyMe", payload.whyMe);
   form.append("consent", String(payload.consent));
 
-  (["front", "top", "back", "side"] as PhotoKey[]).forEach((key) => {
-    const file = payload.photos[key];
+  // Downscale/compress each photo in the browser first. Keeps the total request
+  // body under Vercel's 4.5MB serverless limit (otherwise the platform rejects
+  // real phone photos with a 413 before the route runs).
+  const keys: PhotoKey[] = ["front", "top", "back", "side"];
+  const compressed = await Promise.all(
+    keys.map((key) => {
+      const file = payload.photos[key];
+      return file ? compressImage(file) : Promise.resolve(null);
+    })
+  );
+  keys.forEach((key, i) => {
+    const file = compressed[i];
     if (file) form.append(`photo_${key}`, file);
   });
 
