@@ -48,3 +48,33 @@ non-fatal, which is why the failure was purely at the request/platform layer.
 - HEIC edge case: iOS Safari normally hands the file input a JPEG; if a raw HEIC
   ever reaches `compressImage` and can't be decoded, it falls back to the original
   and could still be large. Not observed, but worth remembering.
+
+### Audit of existing submissions (done same day)
+
+Reviewed every real submission in the Airtable base. The bug was worse than a
+single-day outage — large photos also caused **partial/missing photo uploads on
+records that DID save** (the record is created before photos upload; individual
+large photos then failed and/or the function ran long, leaving the text saved but
+photos incomplete). Findings:
+
+| Applicant | Text/consent | Photos |
+| --- | --- | --- |
+| Fernando Peguero | ✅ saved | ✅ 4/4 (photos happened to be small enough) |
+| Ryan Crespin | ✅ saved | ⚠️ 1/4 (front only) |
+| Robert Rosenbaum | ✅ saved | ❌ 0/4 |
+| Matthew Iulo (owner test) | ✅ saved | ✅ 4/4 (used small site screenshots) |
+
+The lost photos are **not recoverable** (the uploads never landed). **Follow-up:
+contact Ryan Crespin and Robert Rosenbaum to re-request their 4 photos.** Also note
+their confirmation email may not have sent if the function errored before the email
+step — worth a manual check / personal outreach.
+
+**Fix verified against real large photos:** an end-to-end test submitted four
+1.5–2MB images through the production endpoint; compression brought the total to
+806KB and **all four attached** to the resulting Airtable record (`E2E CompressTest`)
+with a `200` response — vs. the raw 6MB version which returned `413`. So the single
+compression fix resolves both the outright 413 failure and the partial-photo loss.
+
+Log note: Vercel runtime logs beyond ~1 day require the paid Observability Plus
+add-on, so the historical error lines for these applicants were no longer
+retained; root cause was established from the Airtable data + a live reproduction.
